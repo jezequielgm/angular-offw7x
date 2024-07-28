@@ -1,0 +1,26 @@
+<div class="flex-container" *ngFor="let dataSource of dataSources">
+  <mat-tree
+    #specialtyPickerTree
+    [dataSource]="dataSource"
+    [treeControl]="dataSource.treeControl"
+  >
+    <!-- This is the tree node template for leaf nodes -->
+    <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+      <!-- use a disabled button to provide padding for tree leaf -->
+      <button mat-icon-button disabled></button>
+      <div *ngIf="!node.expandable">
+        <input
+          type="checkbox"
+          [checked]="node.checked"
+          (change)="onChange($event, node)"
+        />
+        <label>{{node.name}}</label>
+      </div>
+      <div *ngIf="node.expandable">{{node.name}}</div>
+    </mat-tree-node>
+  </mat-tree>
+</div>
+
+<!-- Copyright 2019 Google Inc. All Rights Reserved.
+    Use of this source code is governed by an MIT-style license that
+    can be found in the LICENSE file at http://angular.io/license -->
